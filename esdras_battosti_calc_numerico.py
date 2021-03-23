@@ -198,7 +198,7 @@ if method == 2: # metodo de Newton-Raphson
 		print(f'x{iterations} = {x0[iterations]}')
 		
 		x0.append((x0[iterations] - f(x0[iterations]) / f_prime(x0[iterations]))) # calcula o próximo x0 de acordo com o metodo
-		absolute_error = np.fabs(x0[iterations + 1] - x0[iterations]) # calculo do erro absoluto com a funcao fabs (módulo)
+		absolute_error = np.fabs(x0[iterations] - x0[iterations - 1]) # calculo do erro absoluto com a funcao fabs (módulo)
 		
 		print(f'f(x{iterations}) = {f(x0[iterations])}')
 		print(f'Erro absoluto: {absolute_error}')
