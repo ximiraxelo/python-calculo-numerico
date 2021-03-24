@@ -71,7 +71,7 @@ x0 = list() # declara a lista que ira receber as solucoes xk
 x = sy.symbols('x') # declarando a variavel para o sympy
 absolute_error = 9.99 # starta o erro_absoluto maior que o erro minimo
 iterations = 0 # starta o contador
-interval = np.arange(-1, 1, 0.1) # cria uma lista de elementos de -5 a 5 com o passo 0.1, para plotarmos gráficos
+interval = np.arange(-0.5, 0.5, 0.1) # cria uma lista de elementos de -0.5 a 0.5 com o passo 0.1, para plotarmos gráficos
    
 # dados inicias e escolha do metodo a ser usado:
 
