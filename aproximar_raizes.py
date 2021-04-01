@@ -119,9 +119,7 @@ if method == 1:  # metodo da bisseccao
 			time.sleep(2)
 
 			# troca os valores de a e b
-			memory = limit_a 
-			limit_a = limit_b
-			limit_b = memory
+			limit_a, limit_b = limit_b, limit_a
 
 			print('\n')
 			break
