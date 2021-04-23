@@ -120,7 +120,7 @@ def elimination(matrix_coefficients, matrix_constants): # transforma a matriz co
 	return matrix_coefficients, matrix_constants
 
 
-def  solve_upper_triangle_matrix(matrix_upper, matrix_constants): # resolve a matriz triangular superior
+def solve_upper_triangle_matrix(matrix_upper, matrix_constants): # resolve a matriz triangular superior
 	global level
 	solutions = [0] * level # cria um vetor nulo para com tamanho n para n linhas da matriz
 	solutions[level - 1] = matrix_constants[level - 1] / matrix_upper[level - 1][level - 1]
@@ -138,10 +138,10 @@ def  solve_upper_triangle_matrix(matrix_upper, matrix_constants): # resolve a ma
 
 # startando variáveis
 
-matrix = list()
-constants = list()
-error = 999.999
-solutions = list()
+matrix = list() # matriz de coeficientes do sistema
+constants = list() # matriz de constantes do sistema
+error = float() # erro do método de resolução
+solutions = list() # matriz de soluções
 
 # dados iniciais
 
@@ -165,12 +165,12 @@ if option == 1: # matriz inserida pelo usuário
 
 	print('-'*30)
 	for row in range(level):
-		vector = [] # cria um vetor e na próxima iteracao o recria
+		vector = list() # cria um vetor e na próxima iteracao o recria
 		for column in range(level):
 				print(f'Insira o elemento a{row + 1}{column + 1}:')
 				vector.append(input_float())
 		matrix.append(vector) # preenche a matriz 
-		print(f'insira o elemento b{row + 1}:')
+		print(f'Insira o elemento b{row + 1}:')
 		constants.append(input_float()) # preenche o vetor de constantes
 	print('-'*30)
 
@@ -212,6 +212,7 @@ if method == 1: # resolução por eliminação de gauss
 
 	matrix, constants = elimination(matrix, constants) # invoca a função
 	solutions = solve_upper_triangle_matrix(matrix, constants) # invoca a função
+
 	print('-'*30+'\n'+'Solucoes')
 	print(f'S = {solutions}') # print as soluções encontradas
 	print('-'*30)
@@ -219,23 +220,26 @@ if method == 1: # resolução por eliminação de gauss
 if method == 2: # resolução pelo método de Gauss-Jacobi
 
 	if option == 1: # usuario inserirá o vetor aproximação se assim escolher
-		vector2 = list()
+		vector2 = list() # cria um vetor para ser inserido nas solucoes
 		print('-'*30)
 		for row in range(level):
+			# captura as solucoes inicia do usuario
 			vector2.append(input_float(f'Insira a aproximacao para x{row + 1}:\n'))
 		solutions.append(vector2)
 		print('-'*30)
 
-	absolute_error = input_float('Insira o erro absoluto maximo desejado:\n')
+	absolute_error = input_float('Insira o erro absoluto maximo desejado:\n') # captura do erro esperado
 
 	print_system(matrix, constants, level)
 	print(f'\nVetor aproximacao = {solutions}')
-	line_criterion(matrix, level)
+	line_criterion(matrix, level) # calcula se o metodo é convergente pelo critério das linhas
 
-	while absolute_error <= error:
-		solutions.append(gauss_jacobi(matrix, constants, solutions, level))
-		error = abs(max(solutions[-1]) - max(solutions[-2])) / abs(max(solutions[-1]))
+	while True:
+		solutions.append(gauss_jacobi(matrix, constants, solutions, level)) # calcula as novas soluções e as adiciona na matriz soluções
+		error = abs(max(solutions[-1]) - max(solutions[-2])) / abs(max(solutions[-1])) # o índice -1 se refere ao último elemento (linha) da matriz soluções, -2 o penúltimo
+		if absolute_error <= error: # quando o erro do processo for menor que o erro desejado, paramos de calcular
+			break
 
-	print(f'\nS = {solutions[-1]}')
+	print(f'\nS = {solutions[-1]}') # printa a ultima solução calculada
 
 #if mehtod == 3: # resolução pelo método de Gauss-Seidel
