@@ -151,7 +151,7 @@ def elimination(matrix_coefficients, matrix_constants): # transforma a matriz co
 
 	for column in range(1, level): # navegar nas colunas da matriz
 		print('-'*30)
-		print(f'Iteracao {iteration}\n')
+		print(f'Etapa {iteration}\n')
 		print(f'pivo = {matrix_coefficients[column - 1][column - 1]}') # como column começa em 1 precisamos dos elementos inicados em 0
 
 		for row in range(column + 1, level + 1): # navegar nas linhas  da matriz
@@ -170,6 +170,7 @@ def elimination(matrix_coefficients, matrix_constants): # transforma a matriz co
 
 			print(f'm{row} = {multiplier}')
 		print(f'\nM{column} =\n') 
+		iteration += 1
 		print_matrix(matrix_coefficients, matrix_constants)
 
 	return matrix_coefficients, matrix_constants
