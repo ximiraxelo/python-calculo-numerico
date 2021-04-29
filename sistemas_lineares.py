@@ -7,8 +7,17 @@ programa que resolve sistemas lineares pelos métodos de eliminação de gauss, 
 # bibliotecas:
 
 from time import sleep
+from pandas import DataFrame
 
 # funcoes:
+def increase_matrix(matrix_coefficients, matrix_constants): # cria uma matriz aumentada
+	global level
+
+	for row in range(level): # percorre a matriz na linha e adiciona a constante ao final
+		matrix_coefficients[row].append(matrix_constants[row])
+	increased_matrix = matrix_coefficients
+	return increased_matrix
+
 
 def verifica_diagonal(matrix_coefficients):
 	global level
@@ -169,9 +178,10 @@ def elimination(matrix_coefficients, matrix_constants): # transforma a matriz co
 				matrix_coefficients[row - 1][column2 - 1] = matrix_coefficients[row - 1][column2-1] - multiplier * matrix_coefficients[column - 1][column2 - 1]
 
 			print(f'm{row} = {multiplier}')
+		m_matrix = DataFrame(increase_matrix(matrix_coefficients, matrix_constants)) # estrutura dataframe do pandas
 		print(f'\nM{column} =\n') 
+		print(m_matrix) # mostra matriz M_k
 		iteration += 1
-		print_matrix(matrix_coefficients, matrix_constants)
 
 	return matrix_coefficients, matrix_constants
 
@@ -196,6 +206,7 @@ constants = list() # matriz de constantes do sistema
 error = float() # erro do método de resolução
 solutions = list() # matriz de soluções
 iteration = 0 # contador de iterações
+MAX_ITERATION = 100 # maximo de iterações
 
 # dados iniciais:
 
@@ -292,6 +303,7 @@ if method == 2: # resolução pelo método de Gauss-Jacobi
 
 		print('-'*30)
 		absolute_error = input_float('Insira o erro absoluto maximo desejado:\n') # captura do erro esperado
+		MAX_ITERATION = input_int('Insira o maximo de iteracoes:\n')
 		print('-'*30)
 
 		print(f'\nVetor aproximacao = {solutions}')
@@ -304,7 +316,7 @@ if method == 2: # resolução pelo método de Gauss-Jacobi
 			print(f'\nIteracao {iteration}')
 			print(f'S{iteration} = {solutions[-1]}')
 			print(f'Erro = {error}\n')
-			if error <= absolute_error: # quando o erro do processo for menor que o erro desejado, paramos de calcular
+			if error <= absolute_error or iteration > MAX_ITERATION: # quando o erro do processo for menor que o erro desejado, paramos de calcular
 				break
 
 		print(f'\nSF = {solutions[-1]}') # printa a ultima solução calculada
@@ -338,6 +350,7 @@ if method == 3: # resolução pelo método de Gauss-Seidel
 
 		print('-'*30)
 		absolute_error = input_float('Insira o erro absoluto maximo desejado:\n')
+		MAX_ITERATION = input_int('Insira o maximo de iteracoes:\n')
 		print('-'*30)
 
 		line_criterion(matrix)
@@ -351,7 +364,7 @@ if method == 3: # resolução pelo método de Gauss-Seidel
 			print(f'\nIteracao {iteration}')
 			print(f'S{iteration} = {solutions[-1]}')
 			print(f'Erro = {error}\n')
-			if error <= absolute_error: # quando o erro do processo for menor que o erro desejado, paramos de calcular
+			if error <= absolute_error or iteration > MAX_ITERATION: # quando o erro do processo for menor que o erro desejado, paramos de calcular
 				break
 
 		print(f'\nSF = {solutions[-1]}')
