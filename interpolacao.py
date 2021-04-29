@@ -6,8 +6,8 @@ programa que interpola funções pelo método de newton e lagrange
 
 #bibliotecas:
 
-import pandas as pd
 import matplotlib.pyplot as plt 
+from pandas import DataFrame
 from numpy import arange
 from time import sleep
 
@@ -26,6 +26,32 @@ def lagrange_interpolation(point, points_x, points_y, degree): # interpolacao pe
 
     return estimate
 
+
+def newton_interpolation(point, points_x, points_y, print_df=True): # interpolacao pelo metodo de newton
+    lenght = len(points_x) # quantidade de pontos
+    dd_table = [[None for x in range(lenght)] for x in range(lenght)]
+    # criando uma matriz nula com list comprehension
+    estimative = [None for x in range(lenght)] # armazena o valor da interpolacao de newton
+
+    for index in range(lenght):
+        dd_table[index][0] = points_y[index] # adiciona os valores de f(x) na primeira coluna
+    for index2 in range(1, lenght): # calculo da tabela
+         for index3 in range(lenght - index2):
+                dd_table[index3][index2] = ((dd_table[index3+1][index2-1] - 
+                                            dd_table[index3][index2-1]) /
+                                            (points_x[index2+index3] - points_x[index3]))
+
+    if print_df: # print se for solicitado
+        dd_table_pd = DataFrame(dd_table) # transforma a matriz em uma estrutura dataframe do pandas
+        print(dd_table_pd) # mostra o dataframe   
+
+    coefficient = 1 # representa os (x - x_k) do metodo matematico
+    estimative = dd_table[0][0]
+    for order in range(1, lenght):
+        coefficient *= point - points_x[order - 1] # calculos dos coeficientes
+        estimative += dd_table[0][order] * coefficient # equivalente ao polinomio do metodo matematico
+
+    return estimative
 
 def get_points(): # obtem os pontos conhecidos da funcao
     points = input_int('Quantos pontos?\n') # quantidade de pontos
@@ -150,7 +176,23 @@ if method == 1: # metodo de lagrange
     name = f'$g({point})$' 
     plt.text(1.02*point, interpolated, name, fontsize=12) # mostra o nome do ponto interpolado g(x_0)
     plt.grid(linestyle = '-', linewidth = 0.5, color = 'gray') # mostra a grade (eixos)
+    plt.show() # exibe o grafico
+
+if method == 2: # metodo de newton
+
+    interpolated = newton_interpolation(point, points_x, points_y)
+    print('-'*30)
+    print(f'g({point}) = {interpolated}')
+    print('-'*30)
+
+    interval = arange(min(points_x), max(points_x), 0.1)
+
+    for x in interval:
+        estimatives.append(newton_interpolation(x, points_x, points_y, False))
+    plt.plot(interval, estimatives, 'b-') # plota  a função interpolada g(x)
+    plt.plot(points_x, points_y, 'ro') # plota os pontos informados em x e f(x)
+    plt.plot(point, interpolated, 'rx') # plota o ponto interplado g(x_0)
+    name = f'$g({point})$' 
+    plt.text(1.02*point, interpolated, name, fontsize=12) # mostra o nome do ponto interpolado g(x_0)
+    plt.grid(linestyle = '-', linewidth = 0.5, color = 'gray') # mostra a grade (eixos)
     plt.show()
-
-
-#if method == 2:
