@@ -127,7 +127,7 @@ while True:
     point = input_float('Em qual ponto voce quer a estimativa?\n')
     # garante que o ponto de interesse não está fora do intervalo
     if point < min(points_x) or point > max(points_x): 
-        print(f'O ponto precisa estar entre {min(points_x)} e {max(points_x)}')
+        print(f'O ponto precisa estar entre {min(points_x)} e {max(points_x)}\n')
     else:
         break
 print('-'*30)
@@ -188,7 +188,7 @@ if method == 2: # metodo de newton
     interval = arange(min(points_x), max(points_x), 0.1)
 
     for x in interval:
-        estimatives.append(newton_interpolation(x, points_x, points_y, False))
+        estimatives.append(newton_interpolation(x, points_x, points_y, print_df=False))
     plt.plot(interval, estimatives, 'b-') # plota  a função interpolada g(x)
     plt.plot(points_x, points_y, 'ro') # plota os pontos informados em x e f(x)
     plt.plot(point, interpolated, 'rx') # plota o ponto interplado g(x_0)
