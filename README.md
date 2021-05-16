@@ -27,6 +27,14 @@ Interpolar funções através do métodos:
 * Lagrange
 * Newton
 
+## integral_numerica
+
+Resolver integrais pelos métodos:
+
+* Trapézios
+* Primeira regra de Simpson (1/3 de Simpson)
+* Segunda regra de Simpson (3/8 de Simpson)
+
 # Construção
 
 Os códigos são criados inteiramente no *Python 3.9.2* com adições das bibliotecas:
@@ -89,6 +97,10 @@ Para ver mais sobre os métodos de resolução de sistemas lineares veja em:
 Para ver mais sobre interpolação de funções veja em:
 
 * [Interpolação Polinomial](https://www.notion.so/esdrasbattosti/T-pico-4-Interpola-o-de-fun-es-2b78010c729045eea12fd28a16bff67f)
+
+Para ver mais sobre integração numérica veja em:
+
+* [Integração Numérica](https://www.notion.so/esdrasbattosti/T-pico-5-Integra-o-Num-rica-c5ca04477155478f897547e15fbea565)
 
 > 📘 Disclaimer
 >
