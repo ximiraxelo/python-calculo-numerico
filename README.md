@@ -1,6 +1,6 @@
 # Introdução
 
-Código criado para a disciplina de Cálculo Numérico (MA66B - L81) com a supervisão da professora Dr. Glaucia Bressan da UTFPR-CP
+Código criado para a disciplina de Cálculo Numérico (MA66B - L81) com a supervisão da professora Dr. Glaucia Bressan do deparatamento de matemática (DAMAT) da UTFPR-CP
 
 # Objetivo
 
@@ -37,7 +37,13 @@ Resolver integrais pelos métodos:
 
 # Construção
 
-Os códigos são criados inteiramente no *Python 3.9.2* com adições das bibliotecas:
+## edo_numerica
+
+Resolver PVIs (problema de valor inicial) pelo método de:
+
+* Runge-Kutta de 4ª ordem
+
+Os códigos são criados inteiramente no *Python 3.9.5* com adições das bibliotecas:
 
 <details>
   <summary>NumPy</summary>	
@@ -101,6 +107,10 @@ Para ver mais sobre interpolação de funções veja em:
 Para ver mais sobre integração numérica veja em:
 
 * [Integração Numérica](https://www.notion.so/esdrasbattosti/T-pico-5-Integra-o-Num-rica-c5ca04477155478f897547e15fbea565)
+
+Para ver mais sobre soluções numéricas de EDOs:
+
+* [PVIs por métodos numéricos](https://www.notion.so/esdrasbattosti/T-pico-6-Solu-es-Num-ricas-de-EDO-041dc87f57b04984ad800cbb12619f86)
 
 > 📘 Disclaimer
 >
