@@ -35,13 +35,13 @@ Resolver integrais pelos métodos:
 * Primeira regra de Simpson (1/3 de Simpson)
 * Segunda regra de Simpson (3/8 de Simpson)
 
-# Construção
-
 ## edo_numerica
 
 Resolver PVIs (problema de valor inicial) pelo método de:
 
 * Runge-Kutta de 4ª ordem
+
+# Construção
 
 Os códigos são criados inteiramente no *Python 3.9.5* com adições das bibliotecas:
 
