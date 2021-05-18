@@ -176,6 +176,8 @@ while True:
 		break
 print('-'*35)
 
+# execução:
+
 if method == 1: # regra dos trapezios
 	if option == 2: # exercício 7 da lista 6
 		print('-'*35)
